@@ -13,3 +13,7 @@ data/processed/*
 
 # Caché local de Hugging Face
 .cache/
+
+# Artefactos de construcción y cachés de la aplicación
+.codex-pptx-build/
+.streamlit/cache/

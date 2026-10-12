@@ -3,3 +3,9 @@ pandas
 matplotlib
 pillow
 huggingface_hub
+joblib
+plotly
+scikit-image
+scikit-learn
+seaborn
+streamlit
