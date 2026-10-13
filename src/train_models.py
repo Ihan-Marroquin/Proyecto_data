@@ -143,8 +143,9 @@ def candidate_models() -> dict[str, list[tuple[str, str, object]]]:
                     ("model", LogisticRegression(
                         C=0.5,
                         class_weight="balanced",
-                        max_iter=1_200,
+                        max_iter=300,
                         solver="lbfgs",
+                        tol=1e-3,
                         random_state=RANDOM_STATE,
                     )),
                 ]),
@@ -157,8 +158,9 @@ def candidate_models() -> dict[str, list[tuple[str, str, object]]]:
                     ("model", LogisticRegression(
                         C=2.0,
                         class_weight="balanced",
-                        max_iter=1_200,
+                        max_iter=300,
                         solver="lbfgs",
+                        tol=1e-3,
                         random_state=RANDOM_STATE,
                     )),
                 ]),
@@ -174,7 +176,8 @@ def candidate_models() -> dict[str, list[tuple[str, str, object]]]:
                         C=0.1,
                         class_weight="balanced",
                         random_state=RANDOM_STATE,
-                        max_iter=8_000,
+                        max_iter=4_000,
+                        tol=1e-3,
                     )),
                 ]),
             ),
@@ -187,7 +190,8 @@ def candidate_models() -> dict[str, list[tuple[str, str, object]]]:
                         C=0.5,
                         class_weight="balanced",
                         random_state=RANDOM_STATE,
-                        max_iter=8_000,
+                        max_iter=4_000,
+                        tol=1e-3,
                     )),
                 ]),
             ),
@@ -420,8 +424,18 @@ def save_figures(metrics: pd.DataFrame, per_class: pd.DataFrame, predictions: pd
         palette=PALETTE[: len(metrics)],
         ax=ax,
     )
+    annotation_offsets = {
+        "Bosque aleatorio": (7, 5),
+        "Regresión logística": (7, 14),
+        "SVM lineal": (7, -14),
+    }
     for row in metrics.itertuples():
-        ax.annotate(row.modelo, (row.ms_por_imagen, row.f1_macro), xytext=(6, 6), textcoords="offset points")
+        ax.annotate(
+            row.modelo,
+            (row.ms_por_imagen, row.f1_macro),
+            xytext=annotation_offsets.get(row.modelo, (7, 5)),
+            textcoords="offset points",
+        )
     ax.set(xlabel="Milisegundos por imagen", ylabel="F1 macro", ylim=(0, 1))
     ax.set_title("Calidad, velocidad y tamaño del modelo", weight="bold", loc="left")
     ax.legend().remove()
@@ -452,6 +466,11 @@ def main() -> None:
     args = parse_args()
     paths = find_dataset_paths(args.dataset_root)
     df = load_annotations(paths)
+    full_annotations = paths.annotations.with_name("annotations_full.csv")
+    original_records = (
+        len(pd.read_csv(full_annotations)) if full_annotations.exists() else len(df)
+    )
+    partial_sample = original_records > len(df)
     partitions = stratified_partitions(df, args.test_size, args.validation_size)
     partitions["train"] = cap_training_rows(partitions["train"], args.max_train_per_class)
 
@@ -478,6 +497,14 @@ def main() -> None:
     metadata = {
         "dataset": "AI Mosquito Alert Challenge 2023",
         "registros_totales": int(len(df)),
+        "registros_dataset_original": int(original_records),
+        "muestra_parcial": partial_sample,
+        "metodo_muestra": (
+            "Entradas completas disponibles en una descarga parcial del ZIP oficial; "
+            "el orden del archivo no se alteró."
+            if partial_sample
+            else "Conjunto oficial completo."
+        ),
         "clases": sorted(df["class_label"].unique().tolist()),
         "particiones": {name: int(len(rows)) for name, rows in partitions.items()},
         "maximo_entrenamiento_por_clase": args.max_train_per_class,

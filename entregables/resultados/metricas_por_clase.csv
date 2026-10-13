@@ -1,0 +1,19 @@
+modelo,clase,precision,recall,f1,soporte
+Regresión logística,aegypti,0.0,0.0,0.0,2
+Regresión logística,albopictus,0.6419753086419753,0.5621621621621622,0.5994236311239193,185
+Regresión logística,anopheles,0.0,0.0,0.0,3
+Regresión logística,culex,0.6043956043956044,0.6145251396648045,0.6094182825484764,179
+Regresión logística,culiseta,0.02702702702702703,0.04,0.03225806451612903,25
+Regresión logística,japonicus-koreicus,0.0,0.0,0.0,16
+SVM lineal,aegypti,0.0,0.0,0.0,2
+SVM lineal,albopictus,0.603448275862069,0.5675675675675675,0.584958217270195,185
+SVM lineal,anopheles,0.0,0.0,0.0,3
+SVM lineal,culex,0.5789473684210527,0.553072625698324,0.5657142857142857,179
+SVM lineal,culiseta,0.030303030303030304,0.04,0.034482758620689655,25
+SVM lineal,japonicus-koreicus,0.0,0.0,0.0,16
+Bosque aleatorio,aegypti,0.0,0.0,0.0,2
+Bosque aleatorio,albopictus,0.7453703703703703,0.8702702702702703,0.8029925187032418,185
+Bosque aleatorio,anopheles,0.0,0.0,0.0,3
+Bosque aleatorio,culex,0.7680412371134021,0.8324022346368715,0.7989276139410187,179
+Bosque aleatorio,culiseta,0.0,0.0,0.0,25
+Bosque aleatorio,japonicus-koreicus,0.0,0.0,0.0,16

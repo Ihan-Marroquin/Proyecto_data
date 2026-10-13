@@ -1,0 +1,27 @@
+{
+  "dataset": "AI Mosquito Alert Challenge 2023",
+  "registros_totales": 2728,
+  "registros_dataset_original": 10357,
+  "muestra_parcial": true,
+  "metodo_muestra": "Entradas completas disponibles en una descarga parcial del ZIP oficial; el orden del archivo no se alteró.",
+  "clases": [
+    "aegypti",
+    "albopictus",
+    "anopheles",
+    "culex",
+    "culiseta",
+    "japonicus-koreicus"
+  ],
+  "particiones": {
+    "train": 1414,
+    "validation": 410,
+    "test": 410
+  },
+  "maximo_entrenamiento_por_clase": 600,
+  "semilla": 42,
+  "tamano_imagen": 96,
+  "cajas_ajustadas_a_limites": 1,
+  "modelo_seleccionado": "Bosque aleatorio",
+  "criterio_seleccion": "F1 macro en prueba después de selección por F1 macro de validación",
+  "alcance": "Resultados parciales con descriptores HOG y HSV; no equivalen a una CNN final."
+}
