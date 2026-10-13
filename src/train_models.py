@@ -68,6 +68,25 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def validate_training_config(
+    test_size: float,
+    validation_size: float,
+    maximum: int,
+    image_size: int,
+) -> None:
+    """Valida parámetros antes de iniciar una extracción costosa de imágenes."""
+    if not 0 < test_size < 1:
+        raise ValueError("--test-size debe estar entre 0 y 1.")
+    if not 0 < validation_size < 1:
+        raise ValueError("--validation-size debe estar entre 0 y 1.")
+    if test_size + validation_size >= 1:
+        raise ValueError("La suma de prueba y validación debe ser menor que 1.")
+    if maximum < 1:
+        raise ValueError("--max-train-per-class debe ser mayor que cero.")
+    if image_size < 32:
+        raise ValueError("--image-size debe ser de al menos 32 píxeles.")
+
+
 def stratified_partitions(
     df: pd.DataFrame,
     test_size: float,
@@ -464,6 +483,12 @@ def save_figures(metrics: pd.DataFrame, per_class: pd.DataFrame, predictions: pd
 
 def main() -> None:
     args = parse_args()
+    validate_training_config(
+        args.test_size,
+        args.validation_size,
+        args.max_train_per_class,
+        args.image_size,
+    )
     paths = find_dataset_paths(args.dataset_root)
     df = load_annotations(paths)
     full_annotations = paths.annotations.with_name("annotations_full.csv")

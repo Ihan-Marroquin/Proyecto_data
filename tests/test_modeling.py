@@ -10,6 +10,7 @@ from src.modeling import (
     extract_feature_vector,
     select_feature_set,
 )
+from src.train_models import validate_training_config
 
 
 class ModelingTests(unittest.TestCase):
@@ -40,6 +41,19 @@ class ModelingTests(unittest.TestCase):
         hog = select_feature_set(vector, "hog")
         self.assertEqual(color.shape[1], COLOR_FEATURE_LENGTH)
         self.assertEqual(hog.shape[1] + color.shape[1], vector.shape[1])
+
+    def test_training_config_accepts_valid_values(self):
+        validate_training_config(0.15, 0.15, 600, 96)
+
+    def test_training_config_rejects_invalid_split(self):
+        with self.assertRaisesRegex(ValueError, "suma"):
+            validate_training_config(0.6, 0.4, 600, 96)
+
+    def test_training_config_rejects_invalid_limits(self):
+        with self.assertRaisesRegex(ValueError, "mayor que cero"):
+            validate_training_config(0.15, 0.15, 0, 96)
+        with self.assertRaisesRegex(ValueError, "al menos 32"):
+            validate_training_config(0.15, 0.15, 600, 16)
 
 
 if __name__ == "__main__":
