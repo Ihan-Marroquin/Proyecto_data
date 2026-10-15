@@ -90,6 +90,8 @@ pip install -r requirements.txt
 ```
 
 En macOS o Linux, la activación equivalente es `source .venv/bin/activate`.
+Para reconstruir exactamente el entorno validado de la entrega en Python 3.12,
+se puede usar `pip install -r requirements-lock.txt`.
 
 ### 2. Descargar el conjunto oficial
 
