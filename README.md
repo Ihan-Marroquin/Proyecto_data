@@ -19,6 +19,7 @@ no sustituye la validación de una persona experta en entomología.
 - `entregables/Informe_Proyecto_2_MosquitoAlert.pdf`: informe de la primera etapa.
 - `entregables/Informe_Final_Proyecto_2_MosquitoAlert.pdf`: informe consolidado.
 - `entregables/Presentacion_Final_Proyecto_2_MosquitoAlert.pptx`: presentación final validada.
+- `entregables/SHA256SUMS.txt`: huellas para comprobar la integridad de los artefactos.
 - `app.py`: aplicación Streamlit para clasificar, explorar y comparar modelos.
 - `src/train_models.py`: entrenamiento, ajuste, evaluación y exportación de resultados.
 
@@ -156,6 +157,7 @@ tests/
 entregables/
 ├── figuras/
 ├── resultados/
+├── SHA256SUMS.txt
 ├── Informe_Proyecto_2_MosquitoAlert.pdf
 ├── Informe_Final_Proyecto_2_MosquitoAlert.pdf
 └── Presentacion_Final_Proyecto_2_MosquitoAlert.pptx
