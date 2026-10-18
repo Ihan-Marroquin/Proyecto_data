@@ -23,8 +23,7 @@ from src.modeling import (
 
 ROOT = Path(__file__).resolve().parent
 MODEL_DIR = ROOT / "models"
-RESULT_DIR = ROOT / "entregables" / "resultados"
-FIGURE_DIR = ROOT / "entregables" / "figuras"
+RESULT_DIR = MODEL_DIR / "evaluacion"
 DATASET_ROOT = ROOT / "data" / "raw" / "mosquitoalert"
 CLASS_NAMES = {
     "aegypti": "Aedes aegypti",

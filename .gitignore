@@ -14,11 +14,5 @@ data/processed/*
 # Caché local de Hugging Face
 .cache/
 
-# Artefactos de construcción y cachés de la aplicación
-.codex-pptx-build/
-.chart-data-*/
+# Caché de la aplicación
 .streamlit/cache/
-
-# Borrador de presentación reemplazado por la versión validada v2
-entregables/Presentacion_Final_Proyecto_2_MosquitoAlert_v1.pptx
-entregables/Presentacion_Final_Proyecto_2_MosquitoAlert_v2.pptx

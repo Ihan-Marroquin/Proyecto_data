@@ -13,13 +13,10 @@ visualizaciones técnicas y una aplicación interactiva.
 El sistema identifica seis etiquetas taxonómicas. Su salida es experimental y
 no sustituye la validación de una persona experta en entomología.
 
-## Entregables
+## Archivos principales
 
 - `notebooks/Proyecto_2_MosquitoAlert.ipynb`: análisis exploratorio ejecutado.
-- `entregables/Informe_Proyecto_2_MosquitoAlert.pdf`: informe de la primera etapa.
-- `entregables/Informe_Final_Proyecto_2_MosquitoAlert.pdf`: informe consolidado.
-- `entregables/Presentacion_Final_Proyecto_2_MosquitoAlert.pptx`: presentación final validada.
-- `entregables/SHA256SUMS.txt`: huellas para comprobar la integridad de los artefactos.
+- `Proyecto2_informeFinal.pdf`: informe consolidado, con el análisis exploratorio como apéndice.
 - `app.py`: aplicación Streamlit para clasificar, explorar y comparar modelos.
 - `src/train_models.py`: entrenamiento, ajuste, evaluación y exportación de resultados.
 
@@ -118,19 +115,10 @@ python -m src.train_models --max-train-per-class 250
 El proceso guarda:
 
 - modelos serializados en `models/`;
-- tablas en `entregables/resultados/`;
-- cinco visualizaciones estáticas en `entregables/figuras/`.
+- tablas de evaluación en `models/evaluacion/`, utilizadas por la aplicación;
+- cinco visualizaciones estáticas locales en `data/processed/figuras/`, sin versionar.
 
-### 4. Construir el informe
-
-```text
-python src/build_report.py
-```
-
-El informe final agrega la etapa de modelos y conserva el informe exploratorio
-completo como apéndice.
-
-### 5. Ejecutar pruebas
+### 4. Ejecutar pruebas
 
 ```text
 python -m unittest discover -s tests -v
@@ -140,27 +128,20 @@ python -m unittest discover -s tests -v
 
 ```text
 app.py
+Proyecto2_informeFinal.pdf
 notebooks/
 ├── Proyecto_2_MosquitoAlert.ipynb
 data/
 ├── raw/                         # datos oficiales, no versionados
 └── processed/                   # cachés de características, no versionadas
 models/                          # artefactos para la aplicación
+└── evaluacion/                  # métricas y predicciones para comparar modelos
 src/
 ├── download_dataset.py
 ├── modeling.py
-├── train_models.py
-├── build_report.py
-└── build_presentation.mjs
+└── train_models.py
 tests/
 └── test_modeling.py
-entregables/
-├── figuras/
-├── resultados/
-├── SHA256SUMS.txt
-├── Informe_Proyecto_2_MosquitoAlert.pdf
-├── Informe_Final_Proyecto_2_MosquitoAlert.pdf
-└── Presentacion_Final_Proyecto_2_MosquitoAlert.pptx
 ```
 
 ## Fuentes principales

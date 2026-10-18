@@ -51,8 +51,8 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_DATASET = ROOT / "data" / "raw" / "mosquitoalert"
 FEATURE_DIR = ROOT / "data" / "processed"
 MODEL_DIR = ROOT / "models"
-RESULT_DIR = ROOT / "entregables" / "resultados"
-FIGURE_DIR = ROOT / "entregables" / "figuras"
+RESULT_DIR = MODEL_DIR / "evaluacion"
+FIGURE_DIR = FEATURE_DIR / "figuras"
 RANDOM_STATE = 42
 PALETTE = ["#173A2B", "#2D5A45", "#7B9B83", "#C3913C", "#A64B38", "#66736C"]
 
